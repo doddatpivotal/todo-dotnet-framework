@@ -1,7 +1,7 @@
 ﻿---
 applications:
 - name: todo
-  random-route: true
+#  random-route: true
   stack: windows2016
   services:
     - MyDatabaseConnection
