@@ -1,0 +1,5 @@
+﻿---
+applications:
+- name: todo
+  random-route: true
+  stack: windows2016
