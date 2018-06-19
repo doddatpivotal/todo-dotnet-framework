@@ -23,22 +23,28 @@ namespace DotNetAppSqlDb.Controllers
 
                 if (_db == null)
                 {
-                    String sqlServerFullyQualifiedDomainName = CFEnv.Current.Services[0].Credentials["sqlServerFullyQualifiedDomainName"];
-                    String sqldbName = CFEnv.Current.Services[0].Credentials["sqldbName"];
-                    String databaseLogin = CFEnv.Current.Services[0].Credentials["databaseLogin"];
-                    String databaseLoginPassword = CFEnv.Current.Services[0].Credentials["databaseLoginPassword"];
+                    if (CFEnv.Current.Services.Count > 0)
+                    {
+                        String sqlServerFullyQualifiedDomainName = CFEnv.Current.Services[0].Credentials["sqlServerFullyQualifiedDomainName"];
+                        String sqldbName = CFEnv.Current.Services[0].Credentials["sqldbName"];
+                        String databaseLogin = CFEnv.Current.Services[0].Credentials["databaseLogin"];
+                        String databaseLoginPassword = CFEnv.Current.Services[0].Credentials["databaseLoginPassword"];
 
-                    String connectionString = "Server = tcp:" + sqlServerFullyQualifiedDomainName + ",1433"
-                        + ";Initial Catalog = "+ sqldbName
-                        + ";Persist Security Info = False"
-                        + ";User ID = " + databaseLogin
-                        + ";Password =" + databaseLoginPassword
-                        + ";MultipleActiveResultSets = False"
-                        + ";Encrypt = True"
-                        + ";TrustServerCertificate = False"
-                        + ";Connection Timeout = 30";
-       
-                    _db = new MyDatabaseContext(connectionString);
+                        String connectionString = "Server = tcp:" + sqlServerFullyQualifiedDomainName + ",1433"
+                            + ";Initial Catalog = " + sqldbName
+                            + ";Persist Security Info = False"
+                            + ";User ID = " + databaseLogin
+                            + ";Password =" + databaseLoginPassword
+                            + ";MultipleActiveResultSets = False"
+                            + ";Encrypt = True"
+                            + ";TrustServerCertificate = False"
+                            + ";Connection Timeout = 30";
+
+                        _db = new MyDatabaseContext(connectionString);
+                    } else
+                    {
+                        _db = new MyDatabaseContext();
+                    }
                 }
                 return _db;
             }

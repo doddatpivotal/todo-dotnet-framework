@@ -3,5 +3,6 @@ applications:
 - name: todo
 #  random-route: true
   stack: windows2016
+  memory: 2GB
   services:
     - MyDatabaseConnection
